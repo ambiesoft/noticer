@@ -1,2 +1,5 @@
+2018/09/11 ver 1.0.2
+Show error if no text is available on the clipboard
+
 2018/09/11 ver 1.0.1
 First release
