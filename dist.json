@@ -1,0 +1,28 @@
+{
+    "name": "noticer",
+    "solution": "noticer.sln",
+    "targetproject": "noticer",
+    "configuration": "Release",
+    "targets": [
+        {
+            "setoutdirforbuild": false,
+            "platform": "x86",
+            "outdir": "Release\\noticer"
+        }
+    ],
+    "ShouldBeFiles": [
+        "noticer.exe",
+        "noticer.pdb",
+        "showballoon.exe",
+        "TimedMessageBox.dll",
+        "history.txt"
+    ],
+    "TotalFileCount": "exact",
+    "archivedir": "C:\\Linkout",
+    "remotedir": "https://ambiesoft.fam.cx/ffdav/uploads/noticer/",
+    "remotesha1": "https://ambiesoft.fam.cx/ffdav/uploads/getSha1.php?file=noticer/{}",
+    "ShouldNotBeFiles": [],
+    "ShouldBeOneOfThem": [],
+    "obtainverfrom": "history.txt",
+    "obtainverregex": "\\d+\\.\\d+\\.\\d"
+}
