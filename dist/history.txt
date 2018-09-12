@@ -1,3 +1,6 @@
+2018/09/12 ver 1.0.3
+Update TimedMessageBox (makes font larger)
+
 2018/09/11 ver 1.0.2
 Show error if no text is available on the clipboard
 
