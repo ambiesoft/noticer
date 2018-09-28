@@ -57,6 +57,9 @@
     <ClInclude Include="..\..\lsMisc\UTF16toUTF8.h">
       <Filter>1 Header Files\lsMisc</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\lsMisc\GetFilesInfo.h">
+      <Filter>1 Header Files\lsMisc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -84,6 +87,9 @@
       <Filter>2 Source Files\lsMisc</Filter>
     </ClCompile>
     <ClCompile Include="..\..\lsMisc\stdwin32\stdwin32.cpp">
+      <Filter>2 Source Files\lsMisc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\GetFilesInfo.cpp">
       <Filter>2 Source Files\lsMisc</Filter>
     </ClCompile>
   </ItemGroup>

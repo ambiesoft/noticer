@@ -1,3 +1,6 @@
+2018/09/29 ver 1.0.4
+Add subcommand "desktopfilesize"
+
 2018/09/12 ver 1.0.3
 Update TimedMessageBox (makes font larger)
 
