@@ -60,6 +60,9 @@
     <ClInclude Include="..\..\lsMisc\GetFilesInfo.h">
       <Filter>1 Header Files\lsMisc</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\lsMisc\HighDPI.h">
+      <Filter>1 Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -91,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="..\..\lsMisc\GetFilesInfo.cpp">
       <Filter>2 Source Files\lsMisc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\HighDPI.cpp">
+      <Filter>2 Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

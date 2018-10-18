@@ -99,6 +99,7 @@ copy "$(SolutionDir)dist\history.txt" "$(TargetDir)"</Command>
     <ClInclude Include="..\..\lsMisc\GetClipboardText.h" />
     <ClInclude Include="..\..\lsMisc\GetFilesInfo.h" />
     <ClInclude Include="..\..\lsMisc\GetLastErrorString.h" />
+    <ClInclude Include="..\..\lsMisc\HighDPI.h" />
     <ClInclude Include="..\..\lsMisc\OpenCommon.h" />
     <ClInclude Include="..\..\lsMisc\stdwin32\stdwin32.h" />
     <ClInclude Include="..\..\lsMisc\UrlEncode.h" />
@@ -113,6 +114,7 @@ copy "$(SolutionDir)dist\history.txt" "$(TargetDir)"</Command>
     <ClCompile Include="..\..\lsMisc\GetClipboardText.cpp" />
     <ClCompile Include="..\..\lsMisc\GetFilesInfo.cpp" />
     <ClCompile Include="..\..\lsMisc\GetLastErrorString.cpp" />
+    <ClCompile Include="..\..\lsMisc\HighDPI.cpp" />
     <ClCompile Include="..\..\lsMisc\OpenCommon.cpp" />
     <ClCompile Include="..\..\lsMisc\stdwin32\stdwin32.cpp" />
     <ClCompile Include="..\..\lsMisc\UrlEncode.cpp" />
