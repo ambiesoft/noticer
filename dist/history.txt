@@ -1,3 +1,6 @@
+2019/01/10 ver 1.0.6
+XP support
+
 2018/10/19 ver 1.0.5
 HighDPI support
 
