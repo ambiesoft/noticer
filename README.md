@@ -8,6 +8,8 @@ Notice trivial infomations
 ## show clipboard text
 ```>noticer clipbard```
 
+## show the size of files on Desktop
+```>noticer desktopfilesize```
 
 # Donate
 Support Ambiesoft <http://ambiesoft.fam.cx/donate/>
