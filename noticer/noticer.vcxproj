@@ -15,19 +15,18 @@
     <ProjectGuid>{25A4CBEB-6A0B-4959-859A-6C8C48C4E762}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>noticer</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -101,6 +100,8 @@ copy "$(SolutionDir)dist\history.txt" "$(TargetDir)"</Command>
     <ClInclude Include="..\..\lsMisc\GetLastErrorString.h" />
     <ClInclude Include="..\..\lsMisc\HighDPI.h" />
     <ClInclude Include="..\..\lsMisc\OpenCommon.h" />
+    <ClInclude Include="..\..\lsMisc\SetClipboardText.h" />
+    <ClInclude Include="..\..\lsMisc\stdosd\stdosd.h" />
     <ClInclude Include="..\..\lsMisc\stdwin32\stdwin32.h" />
     <ClInclude Include="..\..\lsMisc\UrlEncode.h" />
     <ClInclude Include="..\..\lsMisc\UTF16toUTF8.h" />
@@ -116,6 +117,12 @@ copy "$(SolutionDir)dist\history.txt" "$(TargetDir)"</Command>
     <ClCompile Include="..\..\lsMisc\GetLastErrorString.cpp" />
     <ClCompile Include="..\..\lsMisc\HighDPI.cpp" />
     <ClCompile Include="..\..\lsMisc\OpenCommon.cpp" />
+    <ClCompile Include="..\..\lsMisc\SetClipboardText.cpp" />
+    <ClCompile Include="..\..\lsMisc\stdosd\stdosd.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\stdosd\stdosd_win.cpp" />
     <ClCompile Include="..\..\lsMisc\stdwin32\stdwin32.cpp" />
     <ClCompile Include="..\..\lsMisc\UrlEncode.cpp" />
     <ClCompile Include="..\..\lsMisc\UTF16toUTF8.cpp" />

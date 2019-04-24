@@ -1,3 +1,9 @@
+2019/04/24 ver 1.0.8
+thread
+
+2019/04/24 ver 1.0.7
+many
+
 2019/01/10 ver 1.0.6
 XP support
 

@@ -1,4 +1,4 @@
 :: launch dist
-C:\local\python3.5\python.exe ..\distSolution\distSolution.py dist.json
+C:\local\python3\python.exe ..\distSolution\distSolution.py dist.json
 
 pause
