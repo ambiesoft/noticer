@@ -19,10 +19,10 @@
     ],
     "TotalFileCount": "exact",
     "archivedir": "C:\\Linkout",
-    "remotedir": "https://ambiesoft.fam.cx/ffdav/uploads/noticer/",
-    "remotesha1": "https://ambiesoft.fam.cx/ffdav/uploads/getSha1.php?file=noticer/{}",
+    "remotedir": "https://ambiesoft.com/ffdav/uploads/noticer/",
+    "remotesha1": "https://ambiesoft.com/ffdav/uploads/getSha1.php?file=noticer/{}",
     "ShouldNotBeFiles": [],
     "ShouldBeOneOfThem": [],
     "obtainverfrom": "history.txt",
-    "obtainverregex": "\\d+\\.\\d+\\.\\d"
+    "obtainverregex": "\\d+\\.\\d+\\.\\d+"
 }
