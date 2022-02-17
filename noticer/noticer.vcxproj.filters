@@ -102,16 +102,16 @@
       <Filter>2 Source Files\lsMisc</Filter>
     </ClCompile>
     <ClCompile Include="..\..\lsMisc\HighDPI.cpp">
-      <Filter>2 Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lsMisc\stdosd\stdosd.cpp">
-      <Filter>2 Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lsMisc\stdosd\stdosd_win.cpp">
-      <Filter>2 Source Files</Filter>
+      <Filter>2 Source Files\lsMisc</Filter>
     </ClCompile>
     <ClCompile Include="..\..\lsMisc\SetClipboardText.cpp">
-      <Filter>2 Source Files</Filter>
+      <Filter>2 Source Files\lsMisc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\stdosd\stdosd.cpp">
+      <Filter>2 Source Files\lsMisc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\stdosd\stdosd_win.cpp">
+      <Filter>2 Source Files\lsMisc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
