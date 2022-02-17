@@ -170,13 +170,13 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			_tcsftime(buff, _countof(buff), format.empty() ? pDefaultFormat : format.c_str(), &tmnow);
 
 			// Japanese date
-			SYSTEMTIME systime;
-			GetSystemTime(&systime);
+			SYSTEMTIME loctime;
+			GetLocalTime(&loctime);
 			WCHAR dateStr[128];
 			if (0 == GetDateFormat(
 				MAKELCID(LANG_JAPANESE, SORT_DEFAULT),
 				DATE_LONGDATE | DATE_USE_ALT_CALENDAR,
-				&systime,
+				&loctime,
 				NULL,
 				dateStr,
 				_countof(dateStr)))
