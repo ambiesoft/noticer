@@ -8,7 +8,6 @@
 #pragma comment(lib, "Shlwapi.lib")
 
 using namespace std;
-using namespace Ambiesoft::stdwin32;
 using namespace Ambiesoft;
 using namespace Ambiesoft::stdosd;
 

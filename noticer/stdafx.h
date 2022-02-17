@@ -23,7 +23,6 @@ struct IUnknown; // Workaround for "combaseapi.h(229): error C2187: syntax error
 #include "../../lsMisc/UTF16toUTF8.h"
 #include "../../lsMisc/UrlEncode.h"
 #include "../../lsMisc/OpenCommon.h"
-#include "../../lsMisc/stdwin32/stdwin32.h"
 #include "../../lsMisc/stdosd/stdosd.h"
 #include "../../lsMisc/CommandLineParser.h"
 #include "../../lsMisc/GetClipboardText.h"
