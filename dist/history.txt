@@ -1,3 +1,6 @@
+2022/02/17 ver 1.0.10
+Added new command 'datej' that shows the Japanese Wareki
+
 2021/02/20 ver 1.0.9
 HighDPI Dialog
 
