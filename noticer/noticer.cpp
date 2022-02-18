@@ -56,6 +56,17 @@ void ErrorQuit(const tstring& message)
 {
 	ErrorQuit(message.c_str());
 }
+
+wstring getDate(const wstring& format)
+{
+	TCHAR buff[256]; buff[0] = 0;
+	time_t now = time(NULL);
+	struct tm tmnow;
+	localtime_s(&tmnow, &now);
+
+	_tcsftime(buff, _countof(buff), format.empty() ? pDefaultFormat : format.c_str(), &tmnow);
+	return buff;
+}
 int APIENTRY _tWinMain(HINSTANCE hInstance,
 	HINSTANCE hPrevInstance,
 	LPTSTR     lpCmdLine,
@@ -153,22 +164,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		}
 		else if (subcommand == L"date")
 		{
-			TCHAR buff[256]; buff[0] = 0;
-			time_t now = time(NULL);
-			struct tm tmnow;
-			localtime_s(&tmnow, &now);
-
-			_tcsftime(buff, _countof(buff), format.empty() ? pDefaultFormat : format.c_str(), &tmnow);
-			outmessage = buff;
+			outmessage = getDate(format);
 		}
 		else if (subcommand == L"datej")
 		{
-			TCHAR buff[256]; buff[0] = 0;
-			time_t now = time(NULL);
-			struct tm tmnow;
-			localtime_s(&tmnow, &now);
-			_tcsftime(buff, _countof(buff), format.empty() ? pDefaultFormat : format.c_str(), &tmnow);
-
 			// Japanese date
 			SYSTEMTIME loctime;
 			GetLocalTime(&loctime);
@@ -183,9 +182,19 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			{
 				ErrorQuit(GetLastErrorString(GetLastError()));
 			}
-
+			WCHAR timeStr[128];
+			if (0 == GetTimeFormat(
+				MAKELCID(LANG_JAPANESE, SORT_DEFAULT),
+				0, //TIME_NOSECONDS,
+				&loctime,
+				nullptr, //L"format",
+				timeStr,
+				_countof(timeStr)))
+			{
+				ErrorQuit(GetLastErrorString(GetLastError()));
+			}
 			wstringstream wss;
-			wss << buff << "\r\n" << dateStr;
+			wss << getDate(format) << "\r\n" << dateStr << L" " << timeStr;
 			outmessage = wss.str();
 		}
 		else if (subcommand == L"desktopfilesize")
