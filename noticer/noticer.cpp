@@ -78,6 +78,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	tstring format;
 	bool isHelp = false;
 	int count = 0;
+	tstring message;
 
 	bool isViewWindow = false;
 	bool isViewBalloon = false;
@@ -102,11 +103,14 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	
 	parser.AddOption(_T("/count"), 1, &count,
 		ArgEncodingFlags::ArgEncodingFlags_Default, _T("second to close window"));
-	
+
+	parser.AddOption(_T("/message"), 1, &message,
+		ArgEncodingFlags::ArgEncodingFlags_Default, _T("Message to show when subcommand is 'message'"));
+
 	COption mainArg(_T(""),
 		ArgCount::ArgCount_ZeroToInfinite,
 		ArgEncodingFlags::ArgEncodingFlags_Default,
-		_T("subcommand: one of 'date', 'datej', 'showclip' or 'desktopfilesize'."));
+		_T("subcommand: one of 'date', 'datej', 'showclip', 'desktopfilesize' or 'message'."));
 	parser.AddOption(&mainArg);
 	
 	parser.Parse();
@@ -224,6 +228,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			}
 
 			outmessage = result;
+		}
+		else if (subcommand == L"message")
+		{
+			outmessage += message;
 		}
 		else
 		{

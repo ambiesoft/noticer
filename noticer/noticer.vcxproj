@@ -65,7 +65,7 @@
     </Link>
     <PostBuildEvent>
       <Command>copy C:\Linkout\CommonExe\showballoon.exe  "$(TargetDir)"
-copy C:\Linkout\CommonDLL\TimedMessageBox.dll  "$(TargetDir)"
+copy C:\Linkout\CommonDLL\$(PlatformTarget)\TimedMessageBox.dll  "$(TargetDir)"
 copy "$(SolutionDir)dist\history.txt" "$(TargetDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -89,7 +89,7 @@ copy "$(SolutionDir)dist\history.txt" "$(TargetDir)"</Command>
     </Link>
     <PostBuildEvent>
       <Command>copy C:\Linkout\CommonExe\showballoon.exe  "$(TargetDir)"
-copy C:\Linkout\CommonDLL\TimedMessageBox.dll  "$(TargetDir)"
+copy C:\Linkout\CommonDLL\$(PlatformTarget)\TimedMessageBox.dll  "$(TargetDir)"
 copy "$(SolutionDir)dist\history.txt" "$(TargetDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
