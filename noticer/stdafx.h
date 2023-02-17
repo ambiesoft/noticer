@@ -34,5 +34,5 @@ struct IUnknown; // Workaround for "combaseapi.h(229): error C2187: syntax error
 #include "../../lsMisc/SetClipboardText.h"
 
 #define APPNAME L"noticer"
-#define APPVERSION L"1.0.12"
+#define APPVERSION L"1.0.13"
 #define I18N(s) s

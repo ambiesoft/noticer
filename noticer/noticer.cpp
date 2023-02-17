@@ -77,7 +77,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	tstring localestring;
 	tstring format;
 	bool isHelp = false;
-	int count = 0;
+	wstring countString;
 	tstring message;
 
 	bool isViewWindow = false;
@@ -101,8 +101,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	parser.AddOptionRange({ _T("/h"), _T("/?") }, 0, &isHelp,
 		ArgEncodingFlags::ArgEncodingFlags_Default, _T("show help"));
 	
-	parser.AddOption(_T("/count"), 1, &count,
-		ArgEncodingFlags::ArgEncodingFlags_Default, _T("second to close window"));
+	parser.AddOption(_T("/count"), 1, &countString,
+		ArgEncodingFlags::ArgEncodingFlags_Default, _T("seconds to close window, or 'inf' to not close"));
 
 	parser.AddOption(_T("/message"), 1, &message,
 		ArgEncodingFlags::ArgEncodingFlags_Default, _T("Message to show when subcommand is 'message'"));
@@ -131,6 +131,12 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		ErrorQuit(msg.c_str());
 	}
 
+	int userCount = 0;
+	if (countString == L"inf")
+		userCount = -1;
+	else
+		userCount = _wtoi(countString.c_str());
+
 	// TODO: must be single
 	vector<tstring> subcommands;
 	for (size_t i = 0; i < mainArg.getValueCount(); ++i)
@@ -145,9 +151,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		ErrorQuit(msg);
 	}
 
-
 	if (!isViewWindow && !isViewBalloon && !isViewClipboard)
 		isViewWindow = true;
+
+	const int actualCount = userCount == 0 ? 10 : userCount;
 
 	_tsetlocale(LC_ALL, localestring.c_str());
 	vector<thread> threads;
@@ -238,14 +245,11 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			ErrorQuit(tstring(I18N(L"Unknown subcommand")) + L": '" + subcommand + L"'");
 		}
 
-
-		count = count <= 0 ? 10 : count;
-		const int millisec = count * 1000;
 		tstring title = subcommand + L" | " + APPNAME;
 		
-
 		if(isViewBalloon)
 		{
+			const int millisec = (actualCount > 0) ? actualCount * 1000 : INT_MAX;
 			threads.push_back(
 				thread([](int millisec, tstring title, tstring outmessage)
 				{
@@ -277,7 +281,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		}
 		if(isViewWindow)
 		{
-			threads.push_back(thread([](int count, tstring title, tstring outmessage)
+			threads.push_back(thread([](int actualCount, tstring title, tstring outmessage)
 				{
 					HMODULE hModule = LoadLibrary(L"TimedMessageBox.dll");
 					if (!hModule)
@@ -295,9 +299,9 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 					tp.position = TIMEDMESSAGEBOX_POSITION_BOTTOMRIGHT;
 					tp.nShowCmd = SW_SHOWNOACTIVATE;
 
-					func2(NULL, count, title.c_str(), outmessage.c_str(), &tp);
+					func2(NULL, actualCount, title.c_str(), outmessage.c_str(), &tp);
 				},
-				count, title, outmessage));
+				actualCount, title, outmessage));
 		}
 		if(isViewClipboard)
 		{
@@ -309,7 +313,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		}
 	} // for subcommands
 
-	this_thread::sleep_for(std::chrono::seconds(count));
+	if(actualCount >= 0)
+		this_thread::sleep_for(std::chrono::seconds(actualCount));
 	for (auto&& th : threads)
 		th.join();
 

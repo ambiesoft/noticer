@@ -1,3 +1,6 @@
+2023/02/17 ver 1.0.13
+Added option to allow 'infinite' seconds
+
 2022/11/10 ver 1.0.12
 Added a subcommand 'message'
 
