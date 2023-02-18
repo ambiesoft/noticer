@@ -79,6 +79,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	bool isHelp = false;
 	wstring countString;
 	tstring message;
+	wstring windowposString;
 
 	bool isViewWindow = false;
 	bool isViewBalloon = false;
@@ -106,6 +107,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 	parser.AddOption(_T("/message"), 1, &message,
 		ArgEncodingFlags::ArgEncodingFlags_Default, _T("Message to show when subcommand is 'message'"));
+
+	parser.AddOption(_T("/windowpos"), 1, &windowposString,
+			ArgEncodingFlags::ArgEncodingFlags_Default,
+			_T("Specify window position. The value can be one of 'topleft', 'topright', 'bottomleft', 'bottomright', 'centerscreen'"));
 
 	COption mainArg(_T(""),
 		ArgCount::ArgCount_ZeroToInfinite,
@@ -245,6 +250,37 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			ErrorQuit(tstring(I18N(L"Unknown subcommand")) + L": '" + subcommand + L"'");
 		}
 
+
+		TIMEDMESSAGEBOX_POSITION windowpos = TIMEDMESSAGEBOX_POSITION_BOTTOMRIGHT;
+		{
+			if(false){}
+			else if (windowposString == L"topleft")
+			{
+				windowpos = TIMEDMESSAGEBOX_POSITION_TOPLEFT;
+			}
+			else if (windowposString == L"topright")
+			{
+				windowpos = TIMEDMESSAGEBOX_POSITION_TOPRIGHT;
+			}
+			else if (windowposString == L"bottomleft")
+			{
+				windowpos = TIMEDMESSAGEBOX_POSITION_BOTTOMLEFT;
+			}
+			else if (windowposString == L"bottomright")
+			{
+				windowpos = TIMEDMESSAGEBOX_POSITION_BOTTOMRIGHT;
+			}
+
+			else if (windowposString == L"centerscreen")
+			{
+				windowpos = TIMEDMESSAGEBOX_POSITION_CENTERSCREEN;
+			}
+			else
+			{
+				ErrorQuit(tstring(I18N(L"Unkown window pos:") + windowposString));
+			}
+		}
+
 		tstring title = subcommand + L" | " + APPNAME;
 		
 		if(isViewBalloon)
@@ -281,7 +317,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		}
 		if(isViewWindow)
 		{
-			threads.push_back(thread([](int actualCount, tstring title, tstring outmessage)
+			threads.push_back(thread([](int actualCount, tstring title, tstring outmessage,
+				TIMEDMESSAGEBOX_POSITION windowpos)
 				{
 					HMODULE hModule = LoadLibrary(L"TimedMessageBox.dll");
 					if (!hModule)
@@ -300,12 +337,12 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 						TIMEDMESSAGEBOX_FLAGS_TOPMOST |
 						TIMEDMESSAGEBOX_FLAGS_HIDERETRY;
 					tp.hWndCenterParent = NULL;
-					tp.position = TIMEDMESSAGEBOX_POSITION_BOTTOMRIGHT;
+					tp.position = windowpos;
 					tp.nShowCmd = SW_SHOWNOACTIVATE;
 
 					func2(NULL, actualCount, title.c_str(), outmessage.c_str(), &tp);
 				},
-				actualCount, title, outmessage));
+				actualCount, title, outmessage, windowpos));
 		}
 		if(isViewClipboard)
 		{
