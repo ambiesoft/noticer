@@ -252,6 +252,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 
 		TIMEDMESSAGEBOX_POSITION windowpos = TIMEDMESSAGEBOX_POSITION_BOTTOMRIGHT;
+		if(!windowposString.empty())
 		{
 			if(false){}
 			else if (windowposString == L"topleft")
