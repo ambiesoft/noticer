@@ -13,36 +13,6 @@ using namespace Ambiesoft::stdosd;
 
 static LPCTSTR pDefaultFormat = _T("%x (%a) %X");
 
-
-void ShowHelp()
-{
-	tstring msg = _T("noticer [/locale locale] [/format format] [/balloon] [/count count] subcommand\n");
-	msg += _T("\n");
-
-	msg += _T("locale: string passed to setlocale()\n");
-	msg += _T("\n");
-
-	msg += _T("format: format string passed to strftime(), default format is \"");
-	msg += pDefaultFormat;
-	msg += _T("\"\n");
-	msg += _T("\n");
-
-	msg += _T("/balloon: Use balloon\n");
-	msg += _T("\n");
-
-	msg += _T("count: Number of seconds to automatically close\n");
-	msg += _T("\n");
-
-	msg += _T("subcommand:\n");
-	msg += _T("  clipboard: show text on the clipboard\n");
-	msg += _T("  date: show date\n");
-	msg += _T("  desktopfilesize: show the file sizes on Desktop\n");
-
-	MessageBox(NULL,
-		msg.c_str(),
-		APPNAME L" ver " APPVERSION,
-		MB_ICONINFORMATION);
-}
 void ErrorQuit(LPCWSTR pMessage)
 {
 	MessageBox(NULL,
