@@ -56,36 +56,36 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	bool isViewClipboard = false;
 	CCommandLineParser parser(_T("dater: notice many"));
 	
-	parser.AddOption(_T("/locale"), 1, &localestring,
-		ArgEncodingFlags::ArgEncodingFlags_Default, _T("Local to set"));
+	parser.AddOption(L"/locale", 1, &localestring,
+		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"Local to set"));
 	
-	parser.AddOption(_T("/format"), 1, &format,
-		ArgEncodingFlags::ArgEncodingFlags_Default, _T("time format"));
+	parser.AddOption(L"/format", 1, &format,
+		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"time format"));
 	
-	parser.AddOption(_T("/view=window"), 0, &isViewWindow,
-		ArgEncodingFlags::ArgEncodingFlags_Default, _T("View in window"));
-	parser.AddOption(_T("/view=balloon"), 0, &isViewBalloon,
-		ArgEncodingFlags::ArgEncodingFlags_Default, _T("View in balloon"));
-	parser.AddOption(_T("/view=clipboard"), 0, &isViewClipboard,
-		ArgEncodingFlags::ArgEncodingFlags_Default, _T("View in clipboard"));
+	parser.AddOption(L"/view=window", 0, &isViewWindow,
+		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"View in window"));
+	parser.AddOption(L"/view=balloon", 0, &isViewBalloon,
+		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"View in balloon"));
+	parser.AddOption(L"/view=clipboard", 0, &isViewClipboard,
+		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"View in clipboard"));
 
 	parser.AddOptionRange({ _T("/h"), _T("/?") }, 0, &isHelp,
-		ArgEncodingFlags::ArgEncodingFlags_Default, _T("show help"));
+		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"show help"));
 	
-	parser.AddOption(_T("/count"), 1, &countString,
-		ArgEncodingFlags::ArgEncodingFlags_Default, _T("seconds to close window, or 'inf' to not close"));
+	parser.AddOption(L"/count", 1, &countString,
+		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"seconds to close window, or 'inf' to not close"));
 
-	parser.AddOption(_T("/message"), 1, &message,
-		ArgEncodingFlags::ArgEncodingFlags_Default, _T("Message to show when subcommand is 'message'"));
+	parser.AddOption(L"/message", 1, &message,
+		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"Message to show when subcommand is 'message'"));
 
-	parser.AddOption(_T("/windowpos"), 1, &windowposString,
+	parser.AddOption(L"/windowpos", 1, &windowposString,
 			ArgEncodingFlags::ArgEncodingFlags_Default,
-			_T("Specify window position. The value can be one of 'topleft', 'topright', 'bottomleft', 'bottomright', 'centerscreen'"));
+			I18N(L"Specify window position. The value can be one of 'topleft', 'topright', 'bottomleft', 'bottomright', 'centerscreen'"));
 
 	COption mainArg(_T(""),
 		ArgCount::ArgCount_ZeroToInfinite,
 		ArgEncodingFlags::ArgEncodingFlags_Default,
-		_T("subcommand: one of 'date', 'datej', 'showclip', 'desktopfilesize' or 'message'."));
+		I18N(L"subcommand: one of 'date', 'datej', 'showclip', 'desktopfilesize' or 'message'."));
 	parser.AddOption(&mainArg);
 	
 	parser.Parse();
@@ -101,7 +101,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	if (parser.hadUnknownOption())
 	{
 		tstring msg;
-		msg += I18N(_T("Unknow Option:\n\n"));
+		msg += I18N(L"Unknow Option:\n\n");
 		msg += parser.getUnknowOptionStrings();
 		ErrorQuit(msg.c_str());
 	}
@@ -180,7 +180,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 				ErrorQuit(GetLastErrorString(GetLastError()));
 			}
 			wstringstream wss;
-			wss << getDate(format) << "\r\n" << dateStr << L" " << timeStr;
+			wss << getDate(format) << L"\r\n" << dateStr << L" " << timeStr;
 			outmessage = wss.str();
 		}
 		else if (subcommand == L"desktopfilesize")
@@ -293,12 +293,12 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 				{
 					HMODULE hModule = LoadLibrary(L"TimedMessageBox.dll");
 					if (!hModule)
-						ErrorQuit(L"Failed to load TimedMessageBox.dll");
+						ErrorQuit(I18N(L"Failed to load TimedMessageBox.dll"));
 
 					FNTimedMessageBox2 func2 = NULL;
 					func2 = (FNTimedMessageBox2)GetProcAddress(hModule, "fnTimedMessageBox2");
 					if (!func2)
-						ErrorQuit(L"Faied GetProcAddress");
+						ErrorQuit(I18N(L"Faied GetProcAddress"));
 
 					TIMEDMESSAGEBOX_PARAMS tp;
 					tp.size = sizeof(tp);
