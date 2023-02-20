@@ -1,3 +1,6 @@
+2023/02/20 ver 1.0.16
+Added I18N
+
 2023/02/20 ver 1.0.15
 Shows Computer Name on the title bar
 

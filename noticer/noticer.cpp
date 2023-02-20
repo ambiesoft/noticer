@@ -11,7 +11,7 @@ using namespace std;
 using namespace Ambiesoft;
 using namespace Ambiesoft::stdosd;
 
-static LPCTSTR pDefaultFormat = _T("%x (%a) %X");
+static LPCTSTR pDefaultFormat = L"%x (%a) %X";
 
 void ErrorQuit(LPCWSTR pMessage)
 {
@@ -43,6 +43,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	int       nCmdShow)
 {
 	Ambiesoft::InitHighDPISupport();
+	Ambiesoft::i18nInitLangmap();
 
 	tstring localestring;
 	tstring format;
@@ -54,7 +55,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	bool isViewWindow = false;
 	bool isViewBalloon = false;
 	bool isViewClipboard = false;
-	CCommandLineParser parser(_T("dater: notice many"));
+	
+	CCommandLineParser parser(I18N(L"Shows notification window"));
 	
 	parser.AddOption(L"/locale", 1, &localestring,
 		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"Local to set"));
@@ -63,26 +65,26 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"time format"));
 	
 	parser.AddOption(L"/view=window", 0, &isViewWindow,
-		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"View in window"));
+		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"View in Window"));
 	parser.AddOption(L"/view=balloon", 0, &isViewBalloon,
-		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"View in balloon"));
+		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"View in Balloon"));
 	parser.AddOption(L"/view=clipboard", 0, &isViewClipboard,
-		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"View in clipboard"));
+		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"View in Clipboard"));
 
-	parser.AddOptionRange({ _T("/h"), _T("/?") }, 0, &isHelp,
-		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"show help"));
+	parser.AddOptionRange({ L"/h", L"/?" }, 0, &isHelp,
+		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"shows help"));
 	
 	parser.AddOption(L"/count", 1, &countString,
 		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"seconds to close window, or 'inf' to not close"));
 
 	parser.AddOption(L"/message", 1, &message,
-		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"Message to show when subcommand is 'message'"));
+		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"Message to show when the subcommand is 'message'"));
 
 	parser.AddOption(L"/windowpos", 1, &windowposString,
 			ArgEncodingFlags::ArgEncodingFlags_Default,
-			I18N(L"Specify window position. The value can be one of 'topleft', 'topright', 'bottomleft', 'bottomright', 'centerscreen'"));
+			I18N(L"Specify a Window position. The value can be one of 'topleft', 'topright', 'bottomleft', 'bottomright', 'centerscreen'"));
 
-	COption mainArg(_T(""),
+	COption mainArg(L"",
 		ArgCount::ArgCount_ZeroToInfinite,
 		ArgEncodingFlags::ArgEncodingFlags_Default,
 		I18N(L"subcommand: one of 'date', 'datej', 'showclip', 'desktopfilesize' or 'message'."));
@@ -100,10 +102,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	}
 	if (parser.hadUnknownOption())
 	{
-		tstring msg;
-		msg += I18N(L"Unknow Option:\n\n");
-		msg += parser.getUnknowOptionStrings();
-		ErrorQuit(msg.c_str());
+		wstringstream msg;
+		msg << I18N(L"Unknow Option:") << endl << endl;
+		msg << parser.getUnknowOptionStrings();
+		ErrorQuit(msg.str().c_str());
 	}
 
 	int userCount = 0;
@@ -195,7 +197,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			FILESINFOW fis;
 			if (!GetFilesInfoW(desktopdir.c_str(), fis))
 			{
-				ErrorQuit(tstring(I18N(L"Failed to get file infoes")));
+				ErrorQuit(tstring(I18N(L"Failed to get file information")));
 			}
 			fis.Sort();
 			tstring result;
@@ -219,7 +221,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		{
 			ErrorQuit(tstring(I18N(L"Unknown subcommand")) + L": '" + subcommand + L"'");
 		}
-
 
 		TIMEDMESSAGEBOX_POSITION windowpos = TIMEDMESSAGEBOX_POSITION_BOTTOMRIGHT;
 		if (!windowposString.empty())
@@ -248,7 +249,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			}
 			else
 			{
-				ErrorQuit(tstring(I18N(L"Unkown window pos:") + windowposString));
+				ErrorQuit(tstring(I18N(L"Unkown window position:") + windowposString));
 			}
 		}
 
@@ -260,7 +261,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			threads.push_back(
 				thread([](int millisec, tstring title, tstring outmessage)
 				{
-					tstring strarg = stdFormat(_T("/title:%s /icon:\"%s\" /duration %d /balloonicon:1 \"%s\""),
+					tstring strarg = stdFormat(L"/title:%s /icon:\"%s\" /duration %d /balloonicon:1 \"%s\"",
 						UrlEncodeStd(title.c_str()).c_str(),
 						stdGetModuleFileName().c_str(),
 						millisec,
@@ -270,8 +271,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 					wstring balloonexe = stdCombinePath(
 						stdGetParentDirectory(stdGetModuleFileName()),
 						L"showballoon.exe");
-					//	L"argCheck.exe");
-
 
 					HANDLE hProcess = NULL;
 					if (!OpenCommon(NULL, balloonexe.c_str(), strarg.c_str(), NULL, &hProcess))
@@ -298,7 +297,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 					FNTimedMessageBox2 func2 = NULL;
 					func2 = (FNTimedMessageBox2)GetProcAddress(hModule, "fnTimedMessageBox2");
 					if (!func2)
-						ErrorQuit(I18N(L"Faied GetProcAddress"));
+						ErrorQuit(I18N(L"GetProcAddress failed"));
 
 					TIMEDMESSAGEBOX_PARAMS tp;
 					tp.size = sizeof(tp);

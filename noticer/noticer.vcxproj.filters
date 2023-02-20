@@ -13,14 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="4 dist">
-      <UniqueIdentifier>{68de1016-8096-4347-99a4-e1ff47231e00}</UniqueIdentifier>
-    </Filter>
     <Filter Include="1 Header Files\lsMisc">
       <UniqueIdentifier>{dd108af8-87f7-4fca-9191-8e4ac01dc14b}</UniqueIdentifier>
     </Filter>
     <Filter Include="2 Source Files\lsMisc">
       <UniqueIdentifier>{7f97f00e-3d99-4272-807a-18c5e1805aac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4 lang">
+      <UniqueIdentifier>{680c4a66-9065-4b97-ba00-7dfd25db898d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="5 dist">
+      <UniqueIdentifier>{68de1016-8096-4347-99a4-e1ff47231e00}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +69,9 @@
     <ClInclude Include="..\..\lsMisc\stdosd\stdosd.h">
       <Filter>1 Header Files\lsMisc</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\lsMisc\I18N.h">
+      <Filter>1 Header Files\lsMisc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -107,6 +113,9 @@
     <ClCompile Include="..\..\lsMisc\stdosd\stdosd_win.cpp">
       <Filter>2 Source Files\lsMisc</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\lsMisc\I18N.cpp">
+      <Filter>2 Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="noticer.rc">
@@ -123,7 +132,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\dist\history.txt">
-      <Filter>4 dist</Filter>
+      <Filter>5 dist</Filter>
+    </Text>
+    <Text Include="lang\jpn.txt">
+      <Filter>4 lang</Filter>
     </Text>
   </ItemGroup>
 </Project>
