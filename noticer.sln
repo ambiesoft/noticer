@@ -6,29 +6,21 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "noticer", "noticer\noticer.vcxproj", "{25A4CBEB-6A0B-4959-859A-6C8C48C4E762}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zzzDist", "zzzDist\zzzDist.vcxproj", "{D7D68087-627F-458D-8982-2E55A0142DF3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{25A4CBEB-6A0B-4959-859A-6C8C48C4E762} = {25A4CBEB-6A0B-4959-859A-6C8C48C4E762}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
-		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{25A4CBEB-6A0B-4959-859A-6C8C48C4E762}.Debug|x64.ActiveCfg = Debug|Win32
-		{25A4CBEB-6A0B-4959-859A-6C8C48C4E762}.Debug|x64.Build.0 = Debug|Win32
 		{25A4CBEB-6A0B-4959-859A-6C8C48C4E762}.Debug|x86.ActiveCfg = Debug|Win32
 		{25A4CBEB-6A0B-4959-859A-6C8C48C4E762}.Debug|x86.Build.0 = Debug|Win32
-		{25A4CBEB-6A0B-4959-859A-6C8C48C4E762}.Release|x64.ActiveCfg = Release|Win32
-		{25A4CBEB-6A0B-4959-859A-6C8C48C4E762}.Release|x64.Build.0 = Release|Win32
 		{25A4CBEB-6A0B-4959-859A-6C8C48C4E762}.Release|x86.ActiveCfg = Release|Win32
 		{25A4CBEB-6A0B-4959-859A-6C8C48C4E762}.Release|x86.Build.0 = Release|Win32
-		{D7D68087-627F-458D-8982-2E55A0142DF3}.Debug|x64.ActiveCfg = Debug|x64
-		{D7D68087-627F-458D-8982-2E55A0142DF3}.Debug|x64.Build.0 = Debug|x64
 		{D7D68087-627F-458D-8982-2E55A0142DF3}.Debug|x86.ActiveCfg = Debug|Win32
-		{D7D68087-627F-458D-8982-2E55A0142DF3}.Debug|x86.Build.0 = Debug|Win32
-		{D7D68087-627F-458D-8982-2E55A0142DF3}.Release|x64.ActiveCfg = Release|x64
-		{D7D68087-627F-458D-8982-2E55A0142DF3}.Release|x64.Build.0 = Release|x64
 		{D7D68087-627F-458D-8982-2E55A0142DF3}.Release|x86.ActiveCfg = Release|Win32
 		{D7D68087-627F-458D-8982-2E55A0142DF3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection

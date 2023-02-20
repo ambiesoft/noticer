@@ -1,13 +1,13 @@
 {
     "name": "noticer",
     "solution": "noticer.sln",
-    "targetproject": "noticer",
+    "targetproject": "zzzDist",
     "configuration": "Release",
     "targets": [
         {
-            "setoutdirforbuild": false,
+            "setoutdirforbuild": true,
             "platform": "x86",
-            "outdir": "Release\\noticer"
+            "outdir": "build\\noticer"
         }
     ],
     "ShouldBeFiles": [
@@ -15,7 +15,8 @@
         "noticer.pdb",
         "showballoon.exe",
         "TimedMessageBox.dll",
-        "history.txt"
+        "history.txt",
+        "lang/jpn.txt"
     ],
     "TotalFileCount": "exact",
     "archivedir": "C:\\Linkout",
