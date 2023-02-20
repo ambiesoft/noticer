@@ -1,3 +1,6 @@
+2023/02/20 ver 1.0.15
+Shows Computer Name on the title bar
+
 2023/02/18 ver 1.0.14
 Added commandline option /windowpos
 

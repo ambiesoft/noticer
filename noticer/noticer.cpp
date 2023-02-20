@@ -222,9 +222,9 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 
 		TIMEDMESSAGEBOX_POSITION windowpos = TIMEDMESSAGEBOX_POSITION_BOTTOMRIGHT;
-		if(!windowposString.empty())
+		if (!windowposString.empty())
 		{
-			if(false){}
+			if (false) {}
 			else if (windowposString == L"topleft")
 			{
 				windowpos = TIMEDMESSAGEBOX_POSITION_TOPLEFT;
@@ -252,7 +252,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			}
 		}
 
-		tstring title = subcommand + L" | " + APPNAME;
+		const tstring title = subcommand + L" | " + APPNAME + L" | " + stdGetComputerName();
 		
 		if(isViewBalloon)
 		{
