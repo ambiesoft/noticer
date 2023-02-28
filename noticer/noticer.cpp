@@ -56,6 +56,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	bool isViewBalloon = false;
 	bool isViewClipboard = false;
 	
+	bool isKeepTopMost = false;
+
 	CCommandLineParser parser(I18N(L"Shows notification window"));
 	
 	parser.AddOption(L"/locale", 1, &localestring,
@@ -81,8 +83,12 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"Message to show when the subcommand is 'message'"));
 
 	parser.AddOption(L"/windowpos", 1, &windowposString,
-			ArgEncodingFlags::ArgEncodingFlags_Default,
-			I18N(L"Specify a Window position. The value can be one of 'topleft', 'topright', 'bottomleft', 'bottomright', 'centerscreen'"));
+		ArgEncodingFlags::ArgEncodingFlags_Default,
+		I18N(L"Specify a Window position. The value can be one of 'topleft', 'topright', 'bottomleft', 'bottomright', 'centerscreen'"));
+
+	parser.AddOption(L"/keeptop", 0, &isKeepTopMost,
+		ArgEncodingFlags::ArgEncodingFlags_Default,
+		I18N(L"Periodically set the window TopMost"));
 
 	COption mainArg(L"",
 		ArgCount::ArgCount_ZeroToInfinite,
@@ -288,7 +294,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		if(isViewWindow)
 		{
 			threads.push_back(thread([](int actualCount, tstring title, tstring outmessage,
-				TIMEDMESSAGEBOX_POSITION windowpos)
+				TIMEDMESSAGEBOX_POSITION windowpos, bool isKeepTop)
 				{
 					HMODULE hModule = LoadLibrary(L"TimedMessageBox.dll");
 					if (!hModule)
@@ -301,18 +307,19 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 					TIMEDMESSAGEBOX_PARAMS tp;
 					tp.size = sizeof(tp);
-					tp.flags = 
+					tp.flags =
 						TIMEDMESSAGEBOX_FLAGS_POSITION |
-						TIMEDMESSAGEBOX_FLAGS_SHOWCMD | 
+						TIMEDMESSAGEBOX_FLAGS_SHOWCMD |
 						TIMEDMESSAGEBOX_FLAGS_TOPMOST |
 						TIMEDMESSAGEBOX_FLAGS_HIDERETRY;
+					tp.flags |= (isKeepTop ? TIMEDMESSAGEBOX_FLAGS_KEEPTOPMOST : 0);
 					tp.hWndCenterParent = NULL;
 					tp.position = windowpos;
 					tp.nShowCmd = SW_SHOWNOACTIVATE;
 
 					func2(NULL, actualCount, title.c_str(), outmessage.c_str(), &tp);
 				},
-				actualCount, title, outmessage, windowpos));
+				actualCount, title, outmessage, windowpos, isKeepTopMost));
 		}
 		if(isViewClipboard)
 		{

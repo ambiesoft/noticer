@@ -17,3 +17,4 @@
 "Unknown subcommand"="未知のサブコマンド"
 "Unkown window position:"="未知のウインドウ位置"
 "GetProcAddress failed"="GetProcAddressに失敗"
+"Periodically set the window TopMost"="定期的にウィンドウをTopMostにセットする"
