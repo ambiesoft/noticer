@@ -33,6 +33,7 @@ struct IUnknown; // Workaround for "combaseapi.h(229): error C2187: syntax error
 #include "../../lsMisc/GetLastErrorString.h"
 #include "../../lsMisc/SetClipboardText.h"
 #include "../../lsMisc/I18N.h"
+#include "../../lsMisc/ScreenSaver.h"
 
 #define APPNAME L"noticer"
 #define APPVERSION L"1.0.17"

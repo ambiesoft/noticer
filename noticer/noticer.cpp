@@ -57,46 +57,56 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	bool isViewClipboard = false;
 	
 	bool isKeepTopMost = false;
+	bool isRecoverFromScreenSaver = false;
 
 	CCommandLineParser parser(I18N(L"Shows notification window"));
 	
-	parser.AddOption(L"/locale", 1, &localestring,
+	parser.AddOption({ L"/locale" }, ArgCount::ArgCount_One, &localestring,
 		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"Local to set"));
 	
-	parser.AddOption(L"/format", 1, &format,
+	parser.AddOption({ L"/format" }, ArgCount::ArgCount_One, &format,
 		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"time format"));
 	
-	parser.AddOption(L"/view=window", 0, &isViewWindow,
+	parser.AddOption({ L"/view=window" }, ArgCount::ArgCount_Zero, &isViewWindow,
 		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"View in Window"));
-	parser.AddOption(L"/view=balloon", 0, &isViewBalloon,
+	parser.AddOption({ L"/view=balloon" }, ArgCount::ArgCount_Zero, &isViewBalloon,
 		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"View in Balloon"));
-	parser.AddOption(L"/view=clipboard", 0, &isViewClipboard,
+	parser.AddOption({ L"/view=clipboard" }, ArgCount::ArgCount_Zero, &isViewClipboard,
 		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"View in Clipboard"));
 
-	parser.AddOptionRange({ L"/h", L"/?" }, 0, &isHelp,
+	parser.AddOption({ L"/h", L"/?" }, ArgCount::ArgCount_Zero, &isHelp,
 		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"shows help"));
 	
-	parser.AddOption(L"/count", 1, &countString,
+	parser.AddOption({ L"/count" }, ArgCount::ArgCount_One, &countString,
 		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"seconds to close window, or 'inf' to not close"));
 
-	parser.AddOption(L"/message", 1, &message,
+	parser.AddOption({ L"/message" }, ArgCount::ArgCount_One, &message,
 		ArgEncodingFlags::ArgEncodingFlags_Default, I18N(L"Message to show when the subcommand is 'message'"));
 
-	parser.AddOption(L"/windowpos", 1, &windowposString,
+	parser.AddOption({ L"/windowpos" }, ArgCount::ArgCount_One, &windowposString,
 		ArgEncodingFlags::ArgEncodingFlags_Default,
 		I18N(L"Specify a Window position. The value can be one of 'topleft', 'topright', 'bottomleft', 'bottomright', 'centerscreen'"));
 
-	parser.AddOption(L"/keeptop", 0, &isKeepTopMost,
+	parser.AddOption({ L"/keeptop" }, ArgCount::ArgCount_Zero, &isKeepTopMost,
 		ArgEncodingFlags::ArgEncodingFlags_Default,
 		I18N(L"Periodically set the window TopMost"));
 
-	COption mainArg(L"",
+	parser.AddOption({ L"/recoverfromscreensaver" }, ArgCount::ArgCount_Zero, &isRecoverFromScreenSaver,
+		ArgEncodingFlags::ArgEncodingFlags_Default,
+		I18N(L"Recover from screen saver"));
+
+	COption mainArg({ L"" },
 		ArgCount::ArgCount_ZeroToInfinite,
 		ArgEncodingFlags::ArgEncodingFlags_Default,
 		I18N(L"subcommand: one of 'date', 'datej', 'showclip', 'desktopfilesize' or 'message'."));
 	parser.AddOption(&mainArg);
 	
 	parser.Parse();
+
+	if (isRecoverFromScreenSaver)
+	{
+		RecoverFromScreenSavor(SCREEN_RECOVER::ALL);
+	}
 
 	if (isHelp)
 	{
