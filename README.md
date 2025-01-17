@@ -12,7 +12,7 @@ Notice trivial infomations
 ```>noticer desktopfilesize```
 
 # Donate
-Support Ambiesoft <http://ambiesoft.fam.cx/donate/>
+Support Ambiesoft <https://ambiesoft.com/donate/>
 
 # Contact
 Email: <ambiesoft.trueff@gmail.com>
