@@ -36,5 +36,5 @@ struct IUnknown; // Workaround for "combaseapi.h(229): error C2187: syntax error
 #include "../../lsMisc/ScreenSaver.h"
 
 #define APPNAME L"noticer"
-#define APPVERSION L"1.0.17"
+#define APPVERSION L"1.0.18"
 
