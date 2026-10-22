@@ -1,3 +1,6 @@
+2026/10/22 ver 1.0.19
+Added 'time' command
+
 2025/01/18 ver 1.0.18
 Added an option '/recoverfromscreensaver'
 

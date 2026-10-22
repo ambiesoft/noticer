@@ -22,6 +22,7 @@
     "archivedir": "C:\\Linkout",
     "remotedir": "https://ambiesoft.com/ffdav/uploads/noticer/",
     "remotesha1": "https://ambiesoft.com/ffdav/uploads/getSha1.php?file=noticer/{}",
+    "remoteonedrivedir":"https://1drv.ms/f/c/f0d9ddc561f5cf32/IgD9f7p4Okv2T5n_XDDvGXB7Ab-SuMDyvlTRx2UqRPbBBFA?e=g9VuS0",
     "ShouldNotBeFiles": [],
     "ShouldBeOneOfThem": [],
     "obtainverfrom": "history.txt",

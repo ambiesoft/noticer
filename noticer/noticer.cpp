@@ -201,6 +201,27 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			wss << getDate(format) << L"\r\n" << dateStr << L" " << timeStr;
 			outmessage = wss.str();
 		}
+		else if (subcommand == L"time")
+		{
+			// Japanese date
+			SYSTEMTIME loctime;
+			GetLocalTime(&loctime);
+
+			WCHAR timeStr[128];
+			if (0 == GetTimeFormat(
+				MAKELCID(LANG_JAPANESE, SORT_DEFAULT),
+				0, //TIME_NOSECONDS,
+				&loctime,
+				nullptr, //L"format",
+				timeStr,
+				_countof(timeStr)))
+			{
+				ErrorQuit(GetLastErrorString(GetLastError()));
+			}
+			wstringstream wss;
+			wss << getDate(format) << L" " << timeStr;
+			outmessage = wss.str();
+		}
 		else if (subcommand == L"desktopfilesize")
 		{
 			tstring desktopdir;
